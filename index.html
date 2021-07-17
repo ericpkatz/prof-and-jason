@@ -1,10 +1,101 @@
 <html>
   <head>
+<style>
+ul {
+  border: solid 1px dodgerBlue;
+}
+
+li {
+  border: solid 1px tomato;
+}
+</style>
   </head>
   <body>
     <h1>Hello World</h1>
+    <ul>
+      <li>hello</li>
+      <li>world</li>
+    </ul>
   <script>
-    console.log('hello world');
+    const h1 = document.querySelector('h1');
+
+    
+
+/*
+    function clickFunction(){
+      this.innerHTML = `${this.innerHTML}!`;
+      console.log(this);
+    }
+    */
+
+const clickFunction = (ev)=> {
+  const target = ev.target;
+  target.innerHTML = `${target.innerHTML}!`;
+};
+
+h1.addEventListener('click', clickFunction);
+
+const ul = document.querySelector('ul');
+ul.addEventListener('click', function(ev){
+  if(ev.target.tagName === 'LI'){
+    const text = ev.target.innerText;
+    const li = document.createElement('li');
+    li.innerText = text + '!';
+    this.appendChild(li);
+  }
+});
+
+const x = {
+  bar: 99,
+  sayHi: function(val1, val2){
+    console.log(this.bar + val1 + val2);
+  }
+};
+
+x.sayHi.call({ bar: 1}, 1, 2);
+x.sayHi.apply({ bar: 1}, [1, 2]);
+
+
+
+
+function Foo(bar){
+  this.bar = bar;
+}
+
+Foo.prototype.sayHi = function(){
+  console.log(`my name is ${this.bar}`);
+}
+
+const f = new Foo(42);
+const sayHello = f.sayHi.bind(f);
+
+/*
+const lis = document.querySelectorAll('li');
+lis.forEach( li => {
+  li.addEventListener('click', function(ev){
+    const text = ev.target.innerText;
+    const _li = document.createElement('li');
+    _li.innerText = text + '!';
+    ul.appendChild(_li);
+    _li.addEventHandler('click', function(ev){
+      const text = ev.target.innerText;
+      const li = document.createElement('li');
+      li.innerText = text + '!';
+      ul.appendChild(li);
+    });
+  });
+});
+*/
+
+/*
+const ul = document.querySelector('ul');
+ul.addEventListener('click', function(ev){
+  const text = ev.target.innerText;
+  const li = document.createElement('li');
+  li.innerText = text + '!';
+  this.appendChild(li);
+});
+*/
   </script>
   </body>
 </html>
